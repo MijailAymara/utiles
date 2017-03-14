@@ -1,0 +1,184 @@
+<html><head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+
+  
+  
+
+  
+  
+  
+
+  
+
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.8.3.js"></script>
+
+  
+
+  
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+  
+
+  
+    
+      <script type="text/javascript" src="//www.addressfinder.co.nz/assets/v2/widget.js"></script>
+    
+  
+
+  <style type="text/css">
+    body {
+    padding: 5px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type=text] {
+    width: 20em
+}
+
+p {
+    margin: 1em 0 0;
+}
+
+  </style>
+
+  <title>jQuery Simple Example</title>
+
+  
+    
+
+
+
+
+<script type="text/javascript">//<![CDATA[
+$(window).load(function(){
+var counter = 0;        
+//$('input').on('keyup', function () {
+//    $('label').text('key up ' + ++counter);
+//});
+
+
+$("#input-nro-convenio").keydown(function(e) {
+				console.log("e.type : " + e.type)
+        var evento = e.type;
+        $("#evento").text(evento);
+        
+				validarAlfanumericosKeyUp("#input-nro-convenio",false);
+        
+        evento
+});
+function validarAlfanumericosKeyUp(idInput,space_accept){
+			var valueBefore = $(idInput).val();
+		console.log("data before: " + valueBefore)
+		setTimeout(function()
+       	{ 
+	        var data = $(idInput).val();
+	        //console.log("data pasted: " + data)
+	         var isOk = validarAlfanumericosPaste(data, space_accept);
+	         //console.log("isOk: " + isOk)
+	         if(!isOk){
+	        	 $(idInput).val(valueBefore);
+	        	 //e.preventDefault();
+	         }
+         },500);
+}
+
+function pasteValidation(idInput,space_accept){
+		var valueBefore = $(idInput).val();
+		//console.log("data before: " + valueBefore)
+		setTimeout(function()
+       	{ 
+	        var data = $(idInput).val();
+	        //console.log("data pasted: " + data)
+	         var isOk = validarAlfanumericosPaste(data, space_accept);
+	         //console.log("isOk: " + isOk)
+	         if(!isOk){
+	        	 $(idInput).val(valueBefore);
+	        	 //e.preventDefault();
+	         }
+         },50);
+} 
+    
+function validarAlfanumericosPaste(tecla, space_accept){
+
+	var exprEmpty = /^\s+$/;
+	if(exprEmpty.test(tecla)){
+		return false;
+	}  
+	if(tecla == 127 | tecla == 8 | tecla == 0){
+		return true;
+	}
+	var expr = /^[A-Za-z0-9]+$/;
+	if(space_accept !== undefined && space_accept){
+		expr = /^[A-Za-z0-9\s]+$/;
+	}
+  
+	var testExpr = expr.test(tecla);
+	
+	return testExpr;
+}
+
+function validarAlfanumericos(event, longitud, space_accept){
+	
+	var tecla = (document.all) ? event.keyCode : event.which;
+	var te = String.fromCharCode(tecla);
+  console.log("te: " + te)
+	if(tecla == 127 | tecla == 8 | tecla == 0)
+		return true;
+	var expr = /^[A-Za-z0-9]+$/;
+	if(space_accept !== undefined && space_accept){
+		expr = /^[A-Za-z0-9\s]+$/;
+	}
+	var te = String.fromCharCode(tecla);
+	var testExpr = expr.test(te);
+	
+	var comp = event.target;
+	valTexto = comp.value;
+
+	if(longitud !== undefined){
+		if(testExpr){
+			if(valTexto.length < longitud)
+				testExpr = true;
+			else
+				testExpr = false;
+		}
+	}
+	return testExpr;
+}
+});//]]> 
+
+</script>
+
+  
+</head>
+
+<body>
+  <div class="g-input_design">
+								<input class="form-control" type="text" name="" value="" id="input-nro-convenio" maxlength="4"> <label class="active">Número de Convenio</label>
+                <label id="evento" class="active"></label>
+							</div>
+  
+  <script>
+  // tell the embed parent frame the height of the content
+  if (window.parent && window.parent.parent){
+    window.parent.parent.postMessage(["resultsFrame", {
+      height: document.body.getBoundingClientRect().height,
+      slug: "None"
+    }], "*")
+  }
+</script>
+
+
+
+
+
+</body></html>
